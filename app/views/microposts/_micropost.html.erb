@@ -1,0 +1,50 @@
+<li id="micropost-<%= micropost.id %>">
+  <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+
+  <div class="dropdown pull-right" >
+    <a class="dropdown-toggle " id="micropost_dropdown" data-toggle="dropdown" href="#">...</a>
+
+    <ul class="dropdown-menu">
+      <li><%= link_to 'Edit', edit_micropost_path(:id => micropost.id), remote: 'true'  %></li>
+      <li><%= link_to 'Delete', micropost_path(:id => micropost.id), method: 'delete',remote: 'true', data: {:confirm => "You sure?" } ,:title => "Confirm" %></li>
+    </ul>
+
+  </div>
+
+  <span class="content" id="content-<%= micropost.id %>"><%= simple_format(micropost.content) %></span>
+  <span class="timestamp" id="timestamp-<%= micropost.id %>">
+    Posted <%= time_ago_in_words(micropost.created_at) %> ago
+    <% unless micropost.created_at == micropost.updated_at %>
+      - Edited
+    <% end %>
+  </span>
+</li>
+
+
+<%= form_for(micropost, method: 'put', remote: 'true' ) do |f| %>
+  <div class="modal fade modal-update" id="updatepost-<%= micropost.id %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class ='field'>
+            <%= f.label :content %><br>
+          <%= f.text_area :content,  class: 'form-control update_micropost_content' %>
+          <div id= 'error'>
+          
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <%= f.submit "Update", data: {disable_with: "Updating..."}, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

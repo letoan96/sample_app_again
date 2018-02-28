@@ -1,0 +1,31 @@
+
+ <%= form_for(@micropost, method: 'put', remote: true) do |f| %>
+  <div class="modal fade bs-example-modal-lg" id="updatepost" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header"><%= @micropost.id %>
+          <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <%=  @micropost %>
+          
+
+        </div>
+        <div class="modal-body">
+          <div class ='field'>
+            <%= f.label :content %><br>
+          <%= f.text_area :content, :value => '',  class: 'form-control micropost_content2' %>
+          <div id= 'error'>
+          
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <%= f.submit "Update", data: {disable_with: "Updating..."}, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

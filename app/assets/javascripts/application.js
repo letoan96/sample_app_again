@@ -14,3 +14,8 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+$( document ).on('turbolinks:load', function() {
+	$('#newpost').on('hidden.bs.modal', function (e) {
+  		$('#error').text('');
+	});
+})

@@ -1,0 +1,3 @@
+$("#updatepost-<%= @micropost.id %>").modal('hide');
+$("#content-<%= @micropost.id %>").html("<%= j simple_format(@micropost.content) %>h");
+$("#timestamp-<%= @micropost.id %>").html('Posted <%= time_ago_in_words(@micropost.created_at) %> ago - Edited');
